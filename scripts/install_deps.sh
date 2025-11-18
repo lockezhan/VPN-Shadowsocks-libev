@@ -70,15 +70,15 @@ install_from_source() {
     
     local TMP_DIR="/tmp/shadowsocks-build"
     mkdir -p "$TMP_DIR"
-    cd "$TMP_DIR"
+    cd "$TMP_DIR" || exit 1
     
     # Clone repository
     if [ ! -d "shadowsocks-libev" ]; then
         git clone https://github.com/shadowsocks/shadowsocks-libev.git
-        cd shadowsocks-libev
+        cd shadowsocks-libev || exit 1
         git submodule update --init --recursive
     else
-        cd shadowsocks-libev
+        cd shadowsocks-libev || exit 1
         git pull
     fi
     

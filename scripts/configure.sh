@@ -29,8 +29,10 @@ configure_shadowsocks() {
 # Create configuration file
 create_config() {
     # Generate random password and port
-    local password=$(generate_password 16)
-    local port=$(generate_port)
+    local password
+    local port
+    password=$(generate_password 16)
+    port=$(generate_port)
     
     # Get server IP
     local server_ip=$(curl -s -4 ifconfig.me || echo "0.0.0.0")

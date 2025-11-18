@@ -19,12 +19,14 @@ check_system() {
     # Check if OS is supported
     case "$OS" in
         ubuntu)
-            if [[ "$VER" < "18.04" ]]; then
+            # Version comparison for Ubuntu (e.g., 18.04, 20.04)
+            if [[ "${VER%%.*}" -lt 18 ]]; then
                 print_warning "Ubuntu version $VER may not be fully supported. Recommended: 18.04+"
             fi
             ;;
         debian)
-            if [[ "$VER" < "10" ]]; then
+            # Version comparison for Debian (e.g., 10, 11, 12)
+            if [[ "$VER" -lt 10 ]]; then
                 print_warning "Debian version $VER may not be fully supported. Recommended: 10+"
             fi
             ;;

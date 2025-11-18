@@ -44,7 +44,7 @@ check_root() {
 # Generate random password
 generate_password() {
     local length=${1:-16}
-    openssl rand -base64 $length | tr -d "=+/" | cut -c1-$length
+    openssl rand -base64 "$length" | tr -d "=+/" | cut -c1-"$length"
 }
 
 # Generate random port
