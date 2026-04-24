@@ -65,7 +65,7 @@ def get_clash_releases():
         return CLASH_RELEASE_CACHE["data"]
 
     repos = [
-        {"repo": "clash-verge-rev/clash-verge-rev",  "label": "ClashVergeRev",  "platform": "Windows / macOS"},
+        {"repo": "clash-verge-rev/clash-verge-rev",  "label": "ClashVergeRev",  "platform": "Windows"},
         {"repo": "chen08209/FlClash", "label": "FlClash", "platform": "Android"},
     ]
 
