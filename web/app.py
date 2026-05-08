@@ -50,12 +50,21 @@ def logout():
 @app.route('/clash.yaml', methods=['GET'])
 def serve_clash_yaml():
     file_path = '/var/www/clash/clash.yaml'
-    if os.path.exists(file_path):
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        return Response(content, mimetype='text/yaml')
-    else:
+    if not os.path.exists(file_path):
         abort(404, "Subscription file not found. Ensure gen_clash_config.sh was executed.")
+
+    user_agent = request.headers.get('User-Agent', '').lower()
+    clash_keywords = ['clash', 'verge', 'flclash', 'meta', 'mihomo']
+    is_clash_client = any(k in user_agent for k in clash_keywords)
+
+    if not is_clash_client:
+        import base64
+        fake_content = base64.b64encode("Please use a valid Clash client (e.g. Clash Verge, FlClash) to import this subscription.".encode('utf-8')).decode('utf-8')
+        return Response(fake_content, mimetype='text/plain')
+
+    with open(file_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    return Response(content, mimetype='text/yaml')
 
 @app.route('/api/proxy-releases')
 def api_releases():
